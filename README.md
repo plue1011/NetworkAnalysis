@@ -40,7 +40,7 @@
         ```
         と入力する
     6. 辞書にneologdを設定する
-        usr/local/etc/mecabrcを編集する
+        usr/local/etc/mecabrcを編集する  
         before
         ```
         ; $Id: mecabrc.in,v 1.3 2006/05/29 15:36:08 taku-ku Exp $;
