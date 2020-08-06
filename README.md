@@ -91,3 +91,5 @@
         mecab = MeCab.Tagger()
         print(mecab.parse ("安倍晋三内閣総理大臣"))
         ```
+
+- test
