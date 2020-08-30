@@ -36,6 +36,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
 
 # 変数や行列の中身を確認
 RUN jupyter labextension install @lckr/jupyterlab_variableinspector
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 # 自動整形
 RUN pip install autopep8 \
