@@ -1,10 +1,10 @@
 import MeCab
 
 class Tokenizer:
-    def __init__(self, add_stopwords=[]):
+    def __init__(self, dict_path="", add_stopwords=[]):
         self.stopwords = self.read_stopwords()
         self.stopwords += add_stopwords
-        self.mecab = MeCab.Tagger()
+        self.mecab = MeCab.Tagger(dict_path)
         
     
     def read_stopwords(self):
