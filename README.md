@@ -92,4 +92,4 @@
         print(mecab.parse ("安倍晋三内閣総理大臣"))
         ```
 
-- merge test
+- merge 変更
