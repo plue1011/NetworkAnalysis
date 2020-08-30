@@ -1,4 +1,19 @@
 # 環境構築
+
+## Dockerの場合
+```
+$ cd Dockerfileがある場所
+$ docker-compose up --build
+```
+
+```
+jupyterlab_1  |     Copy/paste this URL into your browser when you connect for the first time,
+jupyterlab_1  |     to login with a token:
+jupyterlab_1  |         http://d82cf917c187:8888/?token=b523206a8ab66e5deb363792889a96998d274158d5903df0&token=b523206a8ab66e5deb363792889a96998d274158d5903df0
+```
+d82cf917c187 -> localfileに変更し、gooogle chromeに貼り付ける
+
+## ローカル環境(Macの場合)
 - tweepy
     ```
     $ conda install -c conda-forge tweepy
@@ -92,4 +107,4 @@
         print(mecab.parse ("安倍晋三内閣総理大臣"))
         ```
 
-- merge test
+- merge 変更
