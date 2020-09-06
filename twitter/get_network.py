@@ -160,8 +160,29 @@ class GetDescriptionNetwork:
                 'tweet_per_day': res.statuses_count / elapsed_date
                 }
             return user_info
+        except tweepy.error.TweepError as e:
+            print(e.reason)
+            user_info = {
+                'id': None,
+                'screen_name': None,
+                'location': None,
+                'url': None,
+                'description': None,
+                'description_clean': None,
+                'followers_count': None,
+                'friends_count': None,
+                'listed_count': None,
+                'favourites_count': None,
+                'statuses_count': None,
+                'created_at': None,
+                'elapsed_date': None,
+                'favorite_per_day': None,
+                'tweet_per_day': None
+                }
+            return user_info
 
-        
+
+
     def get_follower_ids(self, screen_name):
         """
         フォロワーのidのリストを取得する
@@ -205,7 +226,9 @@ class GetDescriptionNetwork:
         follower_ids = self.get_follower_ids(screen_name)
         
         # id情報からユーザの情報を取得する
-        user_info_list = [self.get_user_info(user_id) for user_id in tqdm(follower_ids, leave=False)]
+        progress = tqdm(follower_ids, leave=False)
+        progress.set_description(f'current user : {screen_name}')
+        user_info_list = [self.get_user_info(user_id) for user_id in progress]
 
         return user_info_list
     
@@ -321,7 +344,6 @@ class GetDescriptionNetwork:
         queue = deque([root_user])
         while queue:
             user_pointed = queue.popleft()
-            print(f'\rcurrent user : {user_pointed}', end='')
             
             try:
                 followers_info = self.get_follower_info(user_pointed)
