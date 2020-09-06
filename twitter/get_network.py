@@ -52,6 +52,9 @@ class GetDescriptionNetwork:
         }
     probability : list of float
         [低伝播確率, 中伝播確率, 高伝播確率]
+    description_stopwords : list of str
+        twitterのdiscription特有のストップワード(十万人のユーザーから出現トップ単語を抽出した)
+    
     favorite_thres : list of float
         [閾値1, 閾値2]
         閾値1以下のユーザ : ノンアクティブユーザ
@@ -105,6 +108,14 @@ class GetDescriptionNetwork:
         self.favorite_thres = favorite_thres
         self.tweet_thres = tweet_thres
         self.probability = probability
+
+        self.description_stopwords = ['する', 'co', 't', 'HTTPS', 'フォロー', '好き', '垢', 'ある', 'なる', 'bot',
+                                    '大好き', '推す', 'やる', '呟く', '無言', '成人', 'ゲーム', 'アカウント',
+                                    'tweet', 'ない', '済', 'ReTweet', '最近', 'iKON', 'お願い', 'つぶやく', '描く', 'DM', '思う',
+                                    '趣味', '見る', '腐る', 'フォロバ', 'ハート', '気軽', '非公式', '雑多', '主', 'たま',
+                                    '失礼', '情報', '現在', '笑顔', 'Twitter', '基本', '応援', 'いる', '生きる',
+                                    '日本', 'できる', '中心', '日常', '多め', 'ヘッダー', 'ブロック',
+                                    '作る', '注意', '多い', '書く', '言う', 'よろしくお願いします', '自由', 'メイン', 'ー']
 
         
     def get_user_info(self, screen_name):
@@ -333,7 +344,7 @@ class GetDescriptionNetwork:
         
         # ルートユーザの情報を取得し、ディスクリプションを単語ごとに分ける
         root_user_info = self.get_user_info(root_user)
-        self.network_keywords = self.tokenizer(root_user_info['description_clean'])
+        self.network_keywords = list(set(self.tokenizer(root_user_info['description_clean'])) - set(self.description_stopwords))
         self.history = {root_user : []}
         self.network = {}
         
