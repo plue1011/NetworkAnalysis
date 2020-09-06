@@ -1,5 +1,5 @@
 import MeCab
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 from collections import deque
 import tweepy
 import datetime
