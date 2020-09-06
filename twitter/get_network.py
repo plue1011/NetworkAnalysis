@@ -140,6 +140,8 @@ class GetDescriptionNetwork:
         try:
             res = self.api.get_user(screen_name)
             elapsed_date = (datetime.datetime.now() - res.created_at).days
+            if elapsed_date == 0:
+                elapsed_date = 1
             user_info = {
                 'id': res.id,
                 'screen_name': res.screen_name,
@@ -157,12 +159,9 @@ class GetDescriptionNetwork:
                 'favorite_per_day': res.favourites_count / elapsed_date,
                 'tweet_per_day': res.statuses_count / elapsed_date
                 }
-        except tweepy.error.TweepError as e:
-            print(e.reason)
+            return user_info
 
-        return user_info
-    
-    
+        
     def get_follower_ids(self, screen_name):
         """
         フォロワーのidのリストを取得する
@@ -186,9 +185,6 @@ class GetDescriptionNetwork:
         except tweepy.error.TweepError as e:
             print(e.reason)
             return []
-
-           
-    
 
     def get_follower_info(self, screen_name):
         """
@@ -284,8 +280,11 @@ class GetDescriptionNetwork:
             to_node_state = 'inactive'
         else:
             to_node_state = 'nomal'
-            
-        to_node_look_prob = 1 / self.users_info[to_node]['friends_count']
+        
+        if self.users_info[to_node]['friends_count'] > 0:
+            to_node_look_prob = 1 / self.users_info[to_node]['friends_count']
+        else:
+            to_node_look_prob = 0
         return to_node_look_prob * self.convert_probability(from_node_state) * self.convert_probability(to_node_state)
         
     def get_network(self, root_user):
@@ -346,6 +345,7 @@ class GetDescriptionNetwork:
                 
                 adj_list += [[user_pointed, to_node, self.set_probability(user_pointed, to_node)]
                              for to_node in self.network[user_pointed]]
+            
             except Exception as e:
                 print('error')
                 print(e)
