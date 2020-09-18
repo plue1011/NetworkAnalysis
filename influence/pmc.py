@@ -2,6 +2,7 @@ import networkx as nx
 import numpy as np
 from collections import deque
 from tqdm.notebook import tqdm
+from sklearn.preprocessing import LabelEncoder
 
 class InfuenceMaximizer:
     """
@@ -375,4 +376,5 @@ class InfuenceMaximizer:
             self.k = 1
             self.run()
             self.k = tmp
+        
         return self.v_gain
