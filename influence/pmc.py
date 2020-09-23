@@ -353,7 +353,7 @@ class InfuenceMaximizer:
         
         for j in range(self.k):
             self.v_gain = {v: sum([self.gain(i, v) for i in range(self.R)])/self.R
-                      for v in tqdm(self.nodes)}
+                      for v in tqdm(self.nodes, leave=False)}
             t = max(self.v_gain, key=self.v_gain.get)
             self.S.append(t)
             
