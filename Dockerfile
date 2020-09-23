@@ -27,6 +27,7 @@ RUN pip install tweepy
 RUN pip install mojimoji
 RUN pip install emoji
 RUN pip install neologdn
+RUN pip install japanize-matplotlib
 
 # nodejsの導入
 RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \

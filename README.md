@@ -32,6 +32,11 @@ d82cf917c187 -> localfileに変更し、gooogle chromeに貼り付ける
     ```
     $ pip install neologdn
     ```
+    
+- japanese-matplotlib
+    ```
+    $ pip install japanize-matplotlib
+    ```
 
 - MeCab neologd
     1. Homebrewがインストールされているか確認する  
@@ -106,5 +111,3 @@ d82cf917c187 -> localfileに変更し、gooogle chromeに貼り付ける
         mecab = MeCab.Tagger()
         print(mecab.parse ("安倍晋三内閣総理大臣"))
         ```
-
-- merge 変更
